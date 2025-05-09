@@ -1,4 +1,4 @@
- "use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
@@ -13,6 +13,7 @@ export default function LoginPage() {
   const router = useRouter();
 
   useEffect(() => {
+    // Redirect if already logged in
     if (user) {
       router.push("/dashboard");
     }
@@ -21,6 +22,7 @@ export default function LoginPage() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsLoading(true);
+
     try {
       await login(phoneNumber);
     } catch (error) {
@@ -36,7 +38,7 @@ export default function LoginPage() {
         {/* Left: Illustration */}
         <div className="hidden md:flex w-1/2 justify-center items-center pr-8">
           <Image
-            src="/globe.svg"
+            src="/voip-illustration.svg"
             alt="Login Illustration"
             width={320}
             height={320}

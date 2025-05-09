@@ -24,18 +24,22 @@ const Navigation = () => {
           </span>
           <span className="text-2xl font-extrabold text-purple-700 tracking-tight">VoIPone</span>
         </Link>
-        {/* Centered Nav Links */}
         <div className="hidden md:flex gap-8 mx-auto text-base font-medium">
           <Link href="/dashboard" className={`hover:text-purple-600 transition ${pathname === "/dashboard" ? "text-purple-600 font-bold" : "text-gray-700"}`}>Home</Link>
-          <Link href="#" className="text-gray-700 hover:text-purple-600 transition">VOIP</Link>
           <Link href="#" className="text-gray-700 hover:text-purple-600 transition">Pages</Link>
           <Link href="#" className="text-gray-700 hover:text-purple-600 transition">Plugins</Link>
           <Link href="#" className="text-gray-700 hover:text-purple-600 transition">Blog</Link>
           <Link href="#" className="text-gray-700 hover:text-purple-600 transition">Shop</Link>
           <Link href="#" className="text-gray-700 hover:text-purple-600 transition">Contact</Link>
         </div>
-        {/* Right Side: User/Account/Cart */}
         <div className="flex items-center gap-4">
+          <Link
+            href="/CallNow"
+            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-extrabold rounded-full shadow-lg text-lg hover:scale-105 hover:from-purple-700 hover:to-blue-700 transition duration-200 border-2 border-purple-200"
+          >
+            <FaPhone className="text-xl" />
+            Call Now
+          </Link>
           {user ? (
             <>
               <span className="hidden md:inline-flex items-center bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-semibold text-sm">
