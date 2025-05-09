@@ -60,9 +60,9 @@ const CallHistory = () => {
   };
 
   return (
-    <div className="overflow-y-auto max-h-96">
+    <div className="bg-white/90 rounded-2xl shadow-lg p-6 overflow-y-auto max-h-96">
       {callHistory.length === 0 ? (
-        <div className="text-center py-10 text-gray-500">
+        <div className="text-center py-10 text-gray-400 italic">
           <p>Tidak ada riwayat panggilan</p>
         </div>
       ) : (
@@ -70,25 +70,25 @@ const CallHistory = () => {
           {callHistory.map((call) => (
             <li
               key={call.id}
-              className="py-3 hover:bg-gray-50 transition duration-150"
+              className="py-3 hover:bg-purple-50/60 transition duration-150 rounded-xl px-2"
             >
-              <div className="flex items-center">
-                <div className="p-2">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-purple-100 rounded-full shadow">
                   {getStatusIcon(call.status, call.type)}
                 </div>
-                <div className="flex-1 ml-3">
+                <div className="flex-1 ml-2">
                   <div className="flex justify-between">
-                    <span className="font-medium">{call.number}</span>
-                    <span className="text-sm text-gray-500">
+                    <span className="font-semibold text-blue-900">{call.number}</span>
+                    <span className="text-xs text-gray-400">
                       {formatDateTime(call.startTime)}
                     </span>
                   </div>
-                  <div className="flex justify-between text-sm text-gray-500 mt-1">
-                    <span className="flex items-center">
+                  <div className="flex justify-between text-xs text-gray-500 mt-1">
+                    <span className="flex items-center gap-1">
                       {call.type === "video" ? (
-                        <FaVideo className="mr-1" />
+                        <FaVideo />
                       ) : (
-                        <FaPhone className="mr-1" />
+                        <FaPhone />
                       )}
                       <span className="capitalize">{call.status}</span>
                     </span>
