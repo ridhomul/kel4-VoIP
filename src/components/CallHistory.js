@@ -35,7 +35,6 @@ const CallHistory = () => {
       .padStart(2, "0")}`;
   };
 
-  // Get status icon
   const getStatusIcon = (status, type) => {
     switch (status) {
       case "missed":

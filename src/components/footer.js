@@ -2,6 +2,8 @@
 
 import { FaPhone } from "react-icons/fa";
 
+const SIP_DOMAIN = "your-kamailio-domain-or-ip"; // <-- Change to your SIP domain
+
 const Footer = () => {
   return (
     <footer className="bg-gradient-to-r from-blue-600 via-purple-600 to-blue-500 text-white py-6 mt-8 shadow-inner rounded-t-3xl">
