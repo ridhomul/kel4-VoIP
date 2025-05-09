@@ -21,13 +21,13 @@ const CallButton = ({ number, type = "audio" }) => {
     <button
       onClick={handleCall}
       className={`
-        flex items-center justify-center px-6 py-3 rounded-lg text-white font-medium
+        flex items-center justify-center px-8 py-3 rounded-full font-bold text-lg shadow-lg transition duration-300
         ${
           type === "audio"
-            ? "bg-green-600 hover:bg-green-700"
-            : "bg-blue-600 hover:bg-blue-700"
+            ? "bg-green-500 hover:bg-green-600 text-white"
+            : "bg-blue-600 hover:bg-blue-700 text-white"
         }
-        transition duration-300
+        focus:outline-none focus:ring-2 focus:ring-purple-400
       `}
       aria-label={type === "audio" ? "Voice Call" : "Video Call"}
     >

@@ -25,12 +25,12 @@ const DialPad = ({ value, onChange }) => {
   ];
 
   return (
-    <div className="w-full max-w-xs mx-auto">
+    <div className="w-full max-w-xs mx-auto bg-white/90 rounded-2xl shadow-lg p-6">
       {/* Number display */}
-      <div className="mb-4 relative">
+      <div className="mb-6 relative">
         <input
           type="tel"
-          className="w-full px-4 py-3 text-2xl text-center font-medium border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+          className="w-full px-5 py-4 text-2xl text-center font-bold border-2 border-purple-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 bg-white shadow-sm"
           value={value}
           onChange={(e) => onChange(e.target.value)}
           placeholder="Enter number"
@@ -39,22 +39,22 @@ const DialPad = ({ value, onChange }) => {
         {value && (
           <button
             onClick={handleClear}
-            className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500 hover:text-red-500"
+            className="absolute right-4 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-red-500 bg-gray-100 rounded-full p-2 shadow"
             aria-label="Clear"
           >
-            <FaBackspace size={20} />
+            <FaBackspace size={22} />
           </button>
         )}
       </div>
 
       {/* Dial pad grid */}
-      <div className="grid grid-cols-3 gap-4">
+      <div className="grid grid-cols-3 gap-5">
         {keys.map((row, rowIndex) =>
           row.map((key, keyIndex) => (
             <button
               key={`${rowIndex}-${keyIndex}`}
               onClick={() => handleKeyPress(key)}
-              className="bg-gray-100 hover:bg-gray-200 text-gray-800 w-14 h-14 rounded-full flex items-center justify-center text-2xl font-medium transition duration-200 mx-auto"
+              className="bg-gradient-to-br from-purple-100 via-blue-100 to-white hover:from-purple-200 hover:via-blue-200 text-purple-700 w-16 h-16 rounded-full flex items-center justify-center text-2xl font-extrabold shadow transition duration-200 mx-auto focus:outline-none focus:ring-2 focus:ring-purple-400"
             >
               {key}
             </button>

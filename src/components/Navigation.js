@@ -14,53 +14,49 @@ const Navigation = () => {
   }
 
   return (
-    <nav className="bg-blue-600 text-white shadow-md">
-      <div className="container mx-auto px-4 py-3">
-        <div className="flex justify-between items-center">
+    <nav className="bg-white shadow-sm w-full sticky top-0 z-30">
+      <div className="max-w-7xl mx-auto px-4 py-2 flex items-center justify-between">
+        {/* Logo */}
+        <Link href={user ? "/dashboard" : "/"} className="flex items-center gap-2">
+          {/* Replace with your logo image if available */}
+          <span className="inline-block">
+            <FaPhone className="text-purple-600 text-2xl" />
+          </span>
+          <span className="text-2xl font-extrabold text-purple-700 tracking-tight">VoIPone</span>
+        </Link>
+        <div className="hidden md:flex gap-8 mx-auto text-base font-medium">
+          <Link href="/dashboard" className={`hover:text-purple-600 transition ${pathname === "/dashboard" ? "text-purple-600 font-bold" : "text-gray-700"}`}>Home</Link>
+          <Link href="#" className="text-gray-700 hover:text-purple-600 transition">Pages</Link>
+          <Link href="#" className="text-gray-700 hover:text-purple-600 transition">Plugins</Link>
+          <Link href="#" className="text-gray-700 hover:text-purple-600 transition">Blog</Link>
+          <Link href="#" className="text-gray-700 hover:text-purple-600 transition">Shop</Link>
+          <Link href="#" className="text-gray-700 hover:text-purple-600 transition">Contact</Link>
+        </div>
+        <div className="flex items-center gap-4">
           <Link
-            href={user ? "/dashboard" : "/"}
-            className="text-xl font-bold flex items-center"
+            href="/CallNow"
+            className="flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-purple-600 to-blue-600 text-white font-extrabold rounded-full shadow-lg text-lg hover:scale-105 hover:from-purple-700 hover:to-blue-700 transition duration-200 border-2 border-purple-200"
           >
-            <FaPhone className="mr-2" />
-            <span>VoIP App</span>
+            <FaPhone className="text-xl" />
+            Call Now
           </Link>
-
           {user ? (
-            <div className="flex items-center space-x-4">
-              <Link
-                href="/dashboard"
-                className={`flex items-center hover:text-blue-200 ${
-                  pathname === "/dashboard" ? "text-blue-200 font-bold" : ""
-                }`}
-              >
-                <FaPhone className="mr-1" />
-                <span>Dial</span>
-              </Link>
-              <Link
-                href="/about"
-                className={`flex items-center hover:text-blue-200 ${
-                  pathname === "/about" ? "text-blue-200 font-bold" : ""
-                }`}
-              >
-                <FaInfoCircle className="mr-1" />
-                <span>About</span>
-              </Link>
+            <>
+              <span className="hidden md:inline-flex items-center bg-purple-100 text-purple-700 px-3 py-1 rounded-full font-semibold text-sm">
+                <FaUser className="mr-2" />
+                {user.phoneNumber}
+              </span>
               <button
                 onClick={logout}
-                className="flex items-center hover:text-blue-200 ml-4"
+                className="ml-2 px-4 py-2 bg-purple-600 text-white rounded-full font-bold hover:bg-purple-700 transition"
               >
-                <FaSignOutAlt className="mr-1" />
-                <span>Logout</span>
+                Logout
               </button>
-              <div className="ml-4 flex items-center">
-                <FaUser className="mr-2" />
-                <span className="font-medium">{user.phoneNumber}</span>
-              </div>
-            </div>
+            </>
           ) : (
             <Link
               href="/login"
-              className="px-4 py-2 bg-white text-blue-600 rounded hover:bg-blue-100 transition duration-300"
+              className="px-6 py-2 bg-purple-600 text-white font-bold rounded-full shadow hover:bg-purple-700 transition duration-300"
             >
               Login
             </Link>

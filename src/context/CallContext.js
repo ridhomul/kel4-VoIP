@@ -47,16 +47,23 @@ export const CallProvider = ({ children }) => {
   const initializeUserAgent = () => {
     try {
       const socket = new JsSIP.WebSocketInterface(
-        "wss://servernyakamailionyananti.com:8443"
+        "wss://your-kamailio-domain-or-ip:5061"
       );
+
+      const SIP_DOMAIN = "your-kamailio-domain-or-ip";
+
+      const iceServers = [
+        { urls: "stun:stun.l.google.com:19302" },
+      ];
 
       const configuration = {
         sockets: [socket],
-        uri: user.sipUsername,
+        uri: `sip:${user.sipUsername}@${SIP_DOMAIN}`,
         password: user.sipPassword,
         display_name: user.phoneNumber,
         register: true,
         register_expires: 300,
+        iceServers,
       };
 
       const userAgent = new JsSIP.UA(configuration);
@@ -131,7 +138,8 @@ export const CallProvider = ({ children }) => {
       setLocalStream(stream);
       setIsVideo(withVideo);
 
-      const destination = `sip:${number}@servernyakamailionyananti.com`;
+      const SIP_DOMAIN = "your-kamailio-domain-or-ip";
+      const destination = `sip:${number}@${SIP_DOMAIN}`;
       const options = {
         mediaConstraints: constraints,
         rtcOfferConstraints: {

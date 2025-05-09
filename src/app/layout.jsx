@@ -17,12 +17,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="id">
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-gradient-to-br from-white via-blue-50 to-purple-50 min-h-screen text-gray-900`}>
         <AuthProvider>
           <CallProvider>
             <div className="flex flex-col min-h-screen">
               <Navigation />
-              <main className="flex-grow">{children}</main>
+              <main className="flex-grow flex flex-col items-center justify-center">
+                {children}
+              </main>
               <Footer />
               <ToastContainer position="top-right" autoClose={5000} />
             </div>
