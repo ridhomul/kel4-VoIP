@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 
 const AuthContext = createContext();
 
-const SIP_SERVER_IP = "10.0.0.10";
+const SIP_SERVER_IP = "172.20.10.3";
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);

@@ -1,39 +1,57 @@
 import { NextResponse } from 'next/server';
 import mysql from 'mysql2/promise';
 
-const SIP_SERVER_IP = "10.0.0.10";
+const SIP_SERVER_IP = "172.20.10.3";
 
 const dbConfig = {
-  host: "10.0.0.10",
+  host: "localhost",
   port: 3306,
-  user: "0822",
-  password: "123",
+  user: "root",
+  password: "",
   database: "kamailio",
 };
 
 // Create a connection pool
 const pool = mysql.createPool(dbConfig);
 
+// Dummy user for testing
+const DUMMY_USER = {
+  username: "081325228201",
+  domain: SIP_SERVER_IP,
+  ha1: "dummy_ha1",
+  ha1b: "dummy_ha1b"
+};
+
 export async function POST(request) {
   let connection;
   try {
-    const { phoneNumber, password } = await request.json();
+    const { phoneNumber } = await request.json();
 
     // Remove any non-digit characters
     const formattedNumber = phoneNumber.replace(/\D/g, "");
 
+    // Check for dummy user first
+    if (formattedNumber === DUMMY_USER.username) {
+      return NextResponse.json({
+        phoneNumber: DUMMY_USER.username,
+        sipUsername: `sip:${DUMMY_USER.username}@${DUMMY_USER.domain}`,
+        ha1: DUMMY_USER.ha1,
+        ha1b: DUMMY_USER.ha1b
+      });
+    }
+
     // Get connection from pool
     connection = await pool.getConnection();
     
-    // Check if user exists in subscriber table and verify password
+    // Check if user exists in subscriber table
     const [rows] = await connection.execute(
-      'SELECT * FROM subscriber WHERE username = ? AND domain = ? AND password = ?',
-      [formattedNumber, SIP_SERVER_IP, password]
+      'SELECT * FROM subscriber WHERE username = ? AND domain = ?',
+      [formattedNumber, SIP_SERVER_IP]
     );
 
     if (rows.length === 0) {
       return NextResponse.json(
-        { error: "Nomor atau password salah" },
+        { error: "Nomor tidak ditemukan" },
         { status: 401 }
       );
     }

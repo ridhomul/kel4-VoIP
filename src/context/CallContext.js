@@ -8,7 +8,7 @@ import { toast } from "react-toastify";
 const CallContext = createContext();
 
 // SIP Server Configuration
-const SIP_SERVER_IP = "10.0.0.10"; // Replace with your actual Kamailio server IP
+const SIP_SERVER_IP = "172.20.10.3"; // Replace with your actual Kamailio server IP
 const SIP_SERVER_PORT = "5060"; // Default SIP port for Kamailio
 
 export const CALL_STATUS = {

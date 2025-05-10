@@ -25,12 +25,42 @@ const Navigation = () => {
           <span className="text-2xl font-extrabold text-purple-700 tracking-tight">VoIPone</span>
         </Link>
         <div className="hidden md:flex gap-8 mx-auto text-base font-medium">
-          <Link href="/dashboard" className={`hover:text-purple-600 transition ${pathname === "/dashboard" ? "text-purple-600 font-bold" : "text-gray-700"}`}>Home</Link>
-          <Link href="#" className="text-gray-700 hover:text-purple-600 transition">Pages</Link>
-          <Link href="#" className="text-gray-700 hover:text-purple-600 transition">Plugins</Link>
-          <Link href="#" className="text-gray-700 hover:text-purple-600 transition">Blog</Link>
-          <Link href="#" className="text-gray-700 hover:text-purple-600 transition">Shop</Link>
-          <Link href="#" className="text-gray-700 hover:text-purple-600 transition">Contact</Link>
+          <Link 
+            href="/dashboard" 
+            className={`hover:text-purple-600 transition ${pathname === "/dashboard" ? "text-purple-600 font-bold" : "text-gray-700"}`}
+          >
+            Home
+          </Link>
+          <Link 
+            href="/pages" 
+            className={`hover:text-purple-600 transition ${pathname === "/pages" ? "text-purple-600 font-bold" : "text-gray-700"}`}
+          >
+            Pages
+          </Link>
+          <Link 
+            href="/plugins" 
+            className={`hover:text-purple-600 transition ${pathname === "/plugins" ? "text-purple-600 font-bold" : "text-gray-700"}`}
+          >
+            Plugins
+          </Link>
+          <Link 
+            href="/blog" 
+            className={`hover:text-purple-600 transition ${pathname === "/blog" ? "text-purple-600 font-bold" : "text-gray-700"}`}
+          >
+            Blog
+          </Link>
+          <Link 
+            href="/shop" 
+            className={`hover:text-purple-600 transition ${pathname === "/shop" ? "text-purple-600 font-bold" : "text-gray-700"}`}
+          >
+            Shop
+          </Link>
+          <Link 
+            href="/contact" 
+            className={`hover:text-purple-600 transition ${pathname === "/contact" ? "text-purple-600 font-bold" : "text-gray-700"}`}
+          >
+            Contact
+          </Link>
         </div>
         <div className="flex items-center gap-4">
           <Link

@@ -3,12 +3,11 @@
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../context/AuthContext";
-import { FaPhone, FaSignInAlt, FaLock } from "react-icons/fa";
+import { FaPhone, FaSignInAlt } from "react-icons/fa";
 import Image from "next/image";
 
 export default function LoginPage() {
   const [phoneNumber, setPhoneNumber] = useState("");
-  const [password, setPassword] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { login, user } = useAuth();
   const router = useRouter();
@@ -23,7 +22,7 @@ export default function LoginPage() {
     e.preventDefault();
     setIsLoading(true);
     try {
-      await login(phoneNumber, password);
+      await login(phoneNumber);
     } catch (error) {
       console.error("Login error:", error);
     } finally {
@@ -60,7 +59,7 @@ export default function LoginPage() {
           </div>
 
           <form onSubmit={handleSubmit}>
-            <div className="mb-5">
+            <div className="mb-6">
               <label htmlFor="phoneNumber" className="block text-gray-700 font-semibold mb-2">
                 Phone Number
               </label>
@@ -76,26 +75,6 @@ export default function LoginPage() {
               <p className="text-sm text-gray-500 mt-1">
                 Format: Country code + number (no plus sign)
               </p>
-            </div>
-
-            <div className="mb-6">
-              <label htmlFor="password" className="block text-gray-700 font-semibold mb-2">
-                Password
-              </label>
-              <div className="relative">
-                <input
-                  type="password"
-                  id="password"
-                  className="w-full px-4 py-3 border-2 border-purple-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-purple-400 text-lg pr-12"
-                  placeholder="Enter your password"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                  required
-                />
-                <div className="absolute inset-y-0 right-0 flex items-center pr-3">
-                  <FaLock className="text-gray-400" />
-                </div>
-              </div>
             </div>
 
             <button
