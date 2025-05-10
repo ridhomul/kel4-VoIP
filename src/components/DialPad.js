@@ -26,7 +26,6 @@ const DialPad = ({ value, onChange }) => {
 
   return (
     <div className="w-full max-w-xs mx-auto bg-white/90 rounded-2xl shadow-lg p-6">
-      {/* Number display */}
       <div className="mb-6 relative">
         <input
           type="tel"
