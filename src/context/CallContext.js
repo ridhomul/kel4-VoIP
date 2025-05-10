@@ -7,6 +7,10 @@ import { toast } from "react-toastify";
 
 const CallContext = createContext();
 
+// SIP Server Configuration
+const SIP_SERVER_IP = "10.0.0.10"; // Replace with your actual Kamailio server IP
+const SIP_SERVER_PORT = "5060"; // Default SIP port for Kamailio
+
 export const CALL_STATUS = {
   IDLE: "idle",
   CALLING: "calling",
@@ -47,23 +51,19 @@ export const CallProvider = ({ children }) => {
   const initializeUserAgent = () => {
     try {
       const socket = new JsSIP.WebSocketInterface(
-        "wss://your-kamailio-domain-or-ip:5061"
+        `wss://${SIP_SERVER_IP}:${SIP_SERVER_PORT}`
       );
-
-      const SIP_DOMAIN = "your-kamailio-domain-or-ip";
-
-      const iceServers = [
-        { urls: "stun:stun.l.google.com:19302" },
-      ];
 
       const configuration = {
         sockets: [socket],
-        uri: `sip:${user.sipUsername}@${SIP_DOMAIN}`,
+        uri: `sip:${user.sipUsername}@${SIP_SERVER_IP}`,
         password: user.sipPassword,
         display_name: user.phoneNumber,
         register: true,
         register_expires: 300,
-        iceServers,
+        iceServers: [
+          { urls: "stun:stun.l.google.com:19302" },
+        ],
       };
 
       const userAgent = new JsSIP.UA(configuration);
@@ -138,8 +138,7 @@ export const CallProvider = ({ children }) => {
       setLocalStream(stream);
       setIsVideo(withVideo);
 
-      const SIP_DOMAIN = "your-kamailio-domain-or-ip";
-      const destination = `sip:${number}@${SIP_DOMAIN}`;
+      const destination = `sip:${number}@${SIP_SERVER_IP}`;
       const options = {
         mediaConstraints: constraints,
         rtcOfferConstraints: {
