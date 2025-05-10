@@ -1,30 +1,16 @@
 "use client";
 
 import { useEffect } from "react";
-import { useRouter } from "next/navigation";
-import { useAuth } from "../context/AuthContext";
+import { SipProvider } from "../context/SipContext";
+import CallInterface from "../components/CallInterface";
 import "../styles/globals.css";
 
-export default function HomePage() {
-  const { user, loading } = useAuth();
-  const router = useRouter();
-
-  useEffect(() => {
-    if (!loading) {
-      if (user) {
-        router.push("/dashboard");
-      } else {
-        router.push("/login");
-      }
-    }
-  }, [user, loading, router]);
-
+export default function Home() {
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="text-center">
-        <div className="animate-spin inline-block w-8 h-8 border-4 border-blue-500 border-t-transparent rounded-full mb-4"></div>
-        <p className="text-gray-600">Mengarahkan...</p>
-      </div>
-    </div>
+    <SipProvider>
+      <main className="min-h-screen">
+        <CallInterface />
+      </main>
+    </SipProvider>
   );
 }

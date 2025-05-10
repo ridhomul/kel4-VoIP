@@ -1,8 +1,9 @@
- "use client";
+"use client";
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { useAuth } from "../../context/AuthContext";
+import { useSip } from "../../context/SipContext";
 import { FaPhone, FaSignInAlt } from "react-icons/fa";
 import Image from "next/image";
 
@@ -10,13 +11,30 @@ export default function LoginPage() {
   const [phoneNumber, setPhoneNumber] = useState("");
   const [isLoading, setIsLoading] = useState(false);
   const { login, user } = useAuth();
+  const { initializeSip } = useSip();
   const router = useRouter();
 
   useEffect(() => {
     if (user) {
-      router.push("/dashboard");
+      // Initialize SIP connection after successful login
+      const initSip = async () => {
+        const config = {
+          wsUri: process.env.NEXT_PUBLIC_SIP_WS_URI,
+          sipUri: `sip:${phoneNumber}@${process.env.NEXT_PUBLIC_SIP_DOMAIN}`,
+          password: process.env.NEXT_PUBLIC_SIP_PASSWORD,
+        };
+
+        const success = await initializeSip(config);
+        if (success) {
+          router.push("/dashboard");
+        } else {
+          console.error("Failed to initialize SIP connection");
+        }
+      };
+
+      initSip();
     }
-  }, [user, router]);
+  }, [user, router, phoneNumber, initializeSip]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -52,7 +70,9 @@ export default function LoginPage() {
                 <FaPhone size={28} />
               </div>
             </div>
-            <h1 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-2">Welcome Back!</h1>
+            <h1 className="text-3xl md:text-4xl font-extrabold text-blue-900 mb-2">
+              Welcome Back!
+            </h1>
             <p className="text-gray-600 text-base md:text-lg">
               Login to your VoIP account and stay connected everywhere.
             </p>
@@ -60,7 +80,10 @@ export default function LoginPage() {
 
           <form onSubmit={handleSubmit}>
             <div className="mb-5">
-              <label htmlFor="phoneNumber" className="block text-gray-700 font-semibold mb-2">
+              <label
+                htmlFor="phoneNumber"
+                className="block text-gray-700 font-semibold mb-2"
+              >
                 Phone Number
               </label>
               <input

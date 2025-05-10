@@ -52,9 +52,7 @@ export const CallProvider = ({ children }) => {
 
       const SIP_DOMAIN = "your-kamailio-domain-or-ip";
 
-      const iceServers = [
-        { urls: "stun:stun.l.google.com:19302" },
-      ];
+      const iceServers = [{ urls: "stun:stun.l.google.com:19302" }];
 
       const configuration = {
         sockets: [socket],
